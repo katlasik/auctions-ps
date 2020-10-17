@@ -20,5 +20,5 @@ jobs:
       - uses: akhileshns/heroku-deploy@master
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "auctions-ps"
+          heroku_app_name: "sda-auctions-ps"
           heroku_email: "${{secrets.HEROKU_EMAIL}}"
