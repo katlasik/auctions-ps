@@ -31,7 +31,7 @@ When started application with apply all migrations from [src/main/resources/db/m
 
 
 ### Test environment
-Test environment is available at [https://sda-auctions-mk.herokuapp.com/](https://sda-auctions-mk.herokuapp.com/).
+Test environment is available at [https://sda-auctions-ps.herokuapp.com/](https://sda-auctions-ps.herokuapp.com/).
 
 
 ### Collaborating
