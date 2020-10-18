@@ -5,14 +5,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.sda.auctions.services.SecurityService;
+import pl.sda.auctions.services.UserService;
 
 @Controller
 public class HomeController {
 
+    private final UserService userService;
     private final SecurityService securityService;
 
-    public HomeController(SecurityService securityService) {
+    public HomeController(SecurityService securityService, UserService userService) {
         this.securityService = securityService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -25,9 +28,9 @@ public class HomeController {
         if (securityService.userIsLoggedIn()) {
             return "redirect:";
         } else {
-			model.addAttribute("error", error);
-			return "login";
-		}
+            model.addAttribute("error", error);
+            return "login";
+        }
     }
 
 }

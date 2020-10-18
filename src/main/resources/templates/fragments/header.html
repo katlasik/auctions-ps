@@ -3,6 +3,7 @@
         <a class="navbar-link text-white" th:text="#{navigation.sell}" href="#"></a>
         <div sec:authorize="isAuthenticated()" class="my-2 my-lg-0 text-white ml-auto">
             <a class="navbar-link text-xl-right text-white" th:text="#{navigation.logout}" th:href="@{/logout}"></a>
+            <a class="col mr-3 navbar-link active text-xl-right text-white" th:text="#{navigation.profile}" th:href="@{/profile}"></a>
         </div>
     </nav>
 </header>

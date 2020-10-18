@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head.html :: head(title='welcome.title')"></head>
+<body>
+<head th:replace="fragments/header.html :: header"></head>
+<main role="main">
+
+    <div class="container-fluid d-flex h-100 p-3 mx-auto flex-column justify-content-center">
+        <div class="container">
+            <h4 class="display-4" th:text="#{profile.title}"></h4><br>
+            <p>
+                <label th:text="#{profile.login.title}"></label>
+                <label th:text="${name}"></label><br>
+                <label th:text="#{profile.login.email}"></label>
+                <label th:text="${email}"></label><br><br>
+                <button type="button" class="btn btn-primary btn-sm" th:text="#{profile.password}" ></button>
+            </p>
+        </div>
+
+    </div>
+
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+
+</body>
+</html>
