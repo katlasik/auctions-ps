@@ -37,7 +37,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    protected User() {}
+    public User() {}
 
     public User(
             Long id,
@@ -93,6 +93,10 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
