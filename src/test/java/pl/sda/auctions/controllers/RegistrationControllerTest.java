@@ -44,12 +44,12 @@ class RegistrationControllerTest {
 	@DisplayName("Happy path for registration")
 	void postRegistration() throws Exception {
 
-		User user = new User();
-		user.setName("user");
-		user.setEmail("user@domain.pl");
-		user.setPassword("password");
-		user.setActive(true);
-		user.setRole(Role.USER);
+		User user = new User(null,
+				"user@domain.pl",
+				"password",
+				"user",
+				true,
+				 Role.USER);
 
 		when(userRepository.save(user)).thenReturn(user);
 		when(userRepository.checkIfMailExists("user@domain.pl")).thenReturn(false);

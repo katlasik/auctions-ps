@@ -37,7 +37,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User() {}
+    protected User() {}
 
     public User(
             Long id,
