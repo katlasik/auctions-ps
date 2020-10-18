@@ -11,20 +11,27 @@ import javax.validation.Valid;
 
 import pl.sda.auctions.model.Role;
 import pl.sda.auctions.model.UserRegistrationForm;
+import pl.sda.auctions.services.SecurityService;
 import pl.sda.auctions.services.UserService;
 
 @Controller
 public class RegistrationController {
 
 	private final UserService userService;
+	private final SecurityService securityService;
 
-	public RegistrationController(UserService userService) {
+	public RegistrationController(UserService userService, SecurityService securityService) {
 		this.userService = userService;
+		this.securityService = securityService;
 	}
 
 	@GetMapping("/registration")
 	public String getRegistration(@ModelAttribute("registration") UserRegistrationForm user) {
-		return "registration";
+		if (securityService.userIsLoggedIn()) {
+			return "redirect";
+		} else {
+			return "registration";
+		}
 	}
 
 	@PostMapping("/registration")
@@ -39,7 +46,7 @@ public class RegistrationController {
 			bindingResult.rejectValue("email", "registration.errorMsg.emailTaken");
 		} else if (!bindingResult.hasErrors()) {
 			userService.createUser(user.getName(), user.getEmail(), user.getPassword(), Role.USER);
-			attributes.addFlashAttribute("success","registration.success");
+			attributes.addFlashAttribute("success", "registration.success");
 			return "redirect:/login";
 		}
 
