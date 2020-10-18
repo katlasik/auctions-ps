@@ -14,7 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Email
+    @Email(regexp = ".+@.+\\..+")
     @NotEmpty
     @NotNull
     @Column(unique = true)

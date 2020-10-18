@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 import pl.sda.auctions.model.Role;
-import pl.sda.auctions.model.UserRegistrationForm;
+import pl.sda.auctions.model.dto.UserRegistrationForm;
 import pl.sda.auctions.services.SecurityService;
 import pl.sda.auctions.services.UserService;
 

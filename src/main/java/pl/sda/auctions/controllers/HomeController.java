@@ -11,17 +11,17 @@ import pl.sda.auctions.services.UserService;
 public class HomeController {
 
 	private final SecurityService securityService;
-    private final UserService userService;
+	private final UserService userService;
 
-    public HomeController(SecurityService securityService, UserService userService) {
-        this.securityService = securityService;
-        this.userService = userService;
-    }
+	public HomeController(SecurityService securityService, UserService userService) {
+		this.securityService = securityService;
+		this.userService = userService;
+	}
 
-    @GetMapping("/")
-    public String getWelcome() {
-        return "welcome";
-    }
+	@GetMapping("/")
+	public String getWelcome() {
+		return "welcome";
+	}
 
 	@GetMapping("/login")
 	public String getLogin(Model model, @RequestParam(defaultValue = "false") boolean error) {

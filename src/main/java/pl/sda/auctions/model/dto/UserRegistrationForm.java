@@ -1,4 +1,4 @@
-package pl.sda.auctions.model;
+package pl.sda.auctions.model.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
