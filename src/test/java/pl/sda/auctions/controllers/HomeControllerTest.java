@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class HomeControllerTest {
@@ -74,21 +75,5 @@ class HomeControllerTest {
 
     }
 
-
-    @MockBean
-    UserRepository userRepository;
-
-    @Test
-    @DisplayName("User should be found by e-mail to display their data on profile page")
-    @WithMockUser(username = "name@gmail.com", password = "pass123")
-    void viewProfile() throws Exception {
-
-        User user = new pl.sda.auctions.model.User(2L, "name@gmail.com", "pass123", "Username", true, Role.USER);
-
-        Mockito.when(userRepository.findByEmail("name@gmail.com")).thenReturn(Optional.of(user));
-        mockMvc.perform(get("/profile")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Username")))
-                .andExpect(content().string(containsString("name@gmail.com")));
-    }
 
 }
