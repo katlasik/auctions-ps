@@ -26,6 +26,14 @@ public class UserService {
         return userRepository.findByEmail(email).isPresent();
     }
 
+    public boolean checkIfMailIsTaken(String email) {
+        return userRepository.checkIfMailExists(email);
+    }
+
+    public boolean checkIfNameIsTaken(String email) {
+        return userRepository.checkIfNameExists(email);
+    }
+
     public void createUser(String name, String email, String password, Role role) {
         var user = new User(
                 null,
