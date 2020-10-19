@@ -7,6 +7,7 @@
     <div class="container-fluid d-flex h-100 p-3 mx-auto flex-column justify-content-center">
         <form method="post" action="/login">
             <div th:text="#{register.success}" th:if="${success}" class="alert alert-success" role="alert"></div>
+            <div th:text="#{auction.loginInfo}" th:if="${auctionLogin}" class="alert alert-warning" role="alert"></div>
             <h2 th:text="#{login.login}"></h2>
             <p>
                 <label for="username" class="sr-only"><h2 th:text="#{login.email}"></h2></label>

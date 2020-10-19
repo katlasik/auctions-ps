@@ -12,10 +12,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
+    Optional<User> findById(Long id);
+
     @Query("select count(u) > 0 from User u where u.email = ?1")
     boolean checkIfMailExists(String email);
 
     @Query("select count(u) > 0 from User u where u.name = ?1")
     boolean checkIfNameExists(String name);
+
+
 
 }

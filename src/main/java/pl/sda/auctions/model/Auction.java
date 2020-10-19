@@ -1,8 +1,11 @@
 package pl.sda.auctions.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,30 +17,37 @@ public class Auction {
 	private Long id;
 
 	@ManyToOne
-	private User user;
+	private User owner;
 
 	@NotEmpty
 	@NotNull
 	@Column
+	@Size(min = 10, max = 200)
 	private String title;
 
 	@NotEmpty
 	@NotNull
 	@Column
+	@Size(min = 10, max = 2000)
 	private String description;
 
-	@NotEmpty
 	@NotNull
 	@Column
-	private Double price;
+	private BigDecimal price;
 
-	public Auction(){}
+	protected Auction(){}
 
-	public Auction(Long id, @NotEmpty @NotNull String title, @NotEmpty @NotNull String description, @NotEmpty @NotNull Double price) {
+	public Auction(Long id,
+				   @NotEmpty @NotNull String title,
+				   @NotEmpty @NotNull String description,
+				   @NotNull BigDecimal price,
+				   User owner
+	) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.price = price;
+		this.owner = owner;
 	}
 
 	@Override
@@ -79,11 +89,11 @@ public class Auction {
 	}
 
 	public User getUser() {
-		return user;
+		return owner;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(User owner) {
+		this.owner = owner;
 	}
 
 	public String getTitle() {
@@ -102,11 +112,11 @@ public class Auction {
 		this.description = description;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
