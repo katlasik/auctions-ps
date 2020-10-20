@@ -20,6 +20,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 import pl.sda.auctions.model.Auction;
 import pl.sda.auctions.model.Role;
@@ -53,14 +55,14 @@ class AuctionControllerTest {
 
 	@Test
 	@DisplayName("Happy path for create new auction")
-	@WithMockUser(username = "name@gmail.com", password = "pass123")
+	@WithMockUser(username = "admin@dummy.pl", password = "pass123")
 	void postAuction() throws Exception {
 
 		Auction auction = new Auction(null,
 				"Tytuł aukcji",
 				"Opis minimum 10 znaków",
-				new BigDecimal(2.99),
-				new User(null, "a@a.pl", "pass", "Tester", true, Role.USER)
+				new BigDecimal(2.99).round(new MathContext(3, RoundingMode.DOWN)),
+				new User(null, "admin@dummy.pl", "pass123", "Tester", true, Role.USER)
 		);
 
 		when(auctionRepository.save(auction)).thenReturn(auction);
@@ -69,7 +71,7 @@ class AuctionControllerTest {
 				.param("title", "Tytuł aukcji")
 				.param("description", "Opis minimum 10 znaków")
 				.param("price", "2.99")
-				.param("owner", "a@a.pl")
+				.param("owner", "admin@dummy.pl")
 				.with(csrf())
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(status().isFound());
