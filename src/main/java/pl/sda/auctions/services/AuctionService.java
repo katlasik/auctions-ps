@@ -12,11 +12,11 @@ import pl.sda.auctions.repository.UserRepository;
 public class AuctionService {
 
 	private AuctionRepository auctionRepository;
-	private UserRepository userRepository;
+	private UserService userService;
 
-	public AuctionService(AuctionRepository auctionRepository, UserRepository userRepository) {
+	public AuctionService(AuctionRepository auctionRepository, UserService userService) {
 		this.auctionRepository = auctionRepository;
-		this.userRepository = userRepository;
+		this.userService = userService;
 	}
 
 	public void createAuction(String title, String description, String price, String ownerEmail) {
@@ -26,7 +26,7 @@ public class AuctionService {
 				title,
 				description,
 				new BigDecimal(price),
-				userRepository.findByEmail(ownerEmail).get()
+				userService.getUserByEmail(ownerEmail).get()
 		);
 		auctionRepository.save(auction);
 	}

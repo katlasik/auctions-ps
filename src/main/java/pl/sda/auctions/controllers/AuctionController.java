@@ -31,7 +31,7 @@ public class AuctionController {
 	}
 
 	@GetMapping("/create_auction")
-	public String getRegistration(@ModelAttribute("auction") AuctionForm auction, RedirectAttributes attributes) {
+	public String getAuction(@ModelAttribute("auction") AuctionForm auction, RedirectAttributes attributes) {
 		if (securityService.userIsLoggedIn()) {
 			return "create_auction";
 		} else {
