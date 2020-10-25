@@ -59,7 +59,7 @@ public class UserService {
 
     public boolean changePassword(String email, String oldPassword, String newPassword) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalStateException("User with " + email + " doesn't exist."));
-        if (user.getPassword().equals(passwordEncoder.encode(oldPassword))) {
+        if (passwordEncoder.matches(oldPassword, user.getPassword())) {
             user.setPassword(passwordEncoder.encode(newPassword));
             userRepository.save(user);
             return true;
@@ -67,5 +67,7 @@ public class UserService {
             return false;
         }
     }
+
+
 
 }

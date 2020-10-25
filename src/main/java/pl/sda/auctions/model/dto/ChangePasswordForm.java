@@ -14,10 +14,10 @@ public class ChangePasswordForm {
     @Size(min = 6, max = 100, message = "{registration.errorMsg.password}")
     private String retypedNewPassword;
 
-    public ChangePasswordForm(String oldPassword, String newPassword, String retypeNewPassword) {
+    public ChangePasswordForm(String oldPassword, String newPassword, String retypedNewPassword) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
-        this.retypedNewPassword = retypeNewPassword;
+        this.retypedNewPassword = retypedNewPassword;
 
     }
 
