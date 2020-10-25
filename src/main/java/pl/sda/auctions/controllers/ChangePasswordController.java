@@ -50,7 +50,7 @@ public class ChangePasswordController {
                 attributes.addFlashAttribute("success", "change.password.success");
                 return "redirect:/profile";
             } else {
-                System.out.println("Hasło niepoprawne.");
+                bindingResult.rejectValue("oldPassword", "change.password.errorMsg.wrongOldPassword");
                 return "change_password";
 
             }
