@@ -66,11 +66,11 @@ class CategoryControllerTest {
 		when(categoryRepository.save(category)).thenReturn(category);
 
 		mockMvc.perform(post("/create_category")
-				.param("title", "Nazwa kategorii")
+				.param("name", "Nazwa kategorii")
 				.param("description", "Opis kategorii")
 				.with(csrf())
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED))
-				.andExpect(status().isOk());
+				.andExpect(status().isFound());
 
 		verify(categoryRepository, times(1)).save(category);
 	}

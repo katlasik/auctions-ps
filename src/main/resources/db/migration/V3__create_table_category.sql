@@ -7,5 +7,5 @@ create table category
 );
 
 alter table auction
-    add column category_id bigint not null,
+    add column category_id bigint unique,
     add constraint auction_category_fk foreign key (category_id) references category (id);

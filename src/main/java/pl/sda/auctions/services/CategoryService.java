@@ -18,6 +18,10 @@ public class CategoryService {
 		this.categoryRepository = categoryRepository;
 	}
 
+	public boolean checkIfCategoryExist(String name){
+		return categoryRepository.checkIfCategoryExists(name);
+	}
+
 	public void createCategory(String name, String description) {
 
 		var category = new Category(

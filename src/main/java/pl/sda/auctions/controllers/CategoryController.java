@@ -1,5 +1,7 @@
 package pl.sda.auctions.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -40,14 +42,15 @@ public class CategoryController {
 	@PostMapping("/create_category")
 	public String getPostAuction(@ModelAttribute("category") @Valid CategoryForm category,
 								 BindingResult bindingResult, RedirectAttributes attributes) {
-		if (!bindingResult.hasErrors()) {
+		if (categoryService.checkIfCategoryExist(category.getName())) {
+			bindingResult.rejectValue("name", "category.errorMsg.categoryExists");
+		} else if (!bindingResult.hasErrors()) {
 			attributes.addFlashAttribute("categorySuccess", "{category.success");
 			categoryService.createCategory(category.getName(),
 					category.getDescription()
 			);
 			return "redirect:";
-		} else {
-			return "create_category";
 		}
+		return "create_category";
 	}
 }
