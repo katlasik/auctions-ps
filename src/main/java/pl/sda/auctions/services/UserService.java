@@ -1,5 +1,7 @@
 package pl.sda.auctions.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.auctions.model.Role;
@@ -11,8 +13,10 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public UserService(
             UserRepository userRepository,
@@ -44,6 +48,7 @@ public class UserService {
                 role
 
         );
+        logger.info("User was created. User = {}", user);
         userRepository.save(user);
     }
 
@@ -51,4 +56,3 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 }
-

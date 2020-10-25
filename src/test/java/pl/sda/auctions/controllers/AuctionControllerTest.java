@@ -61,7 +61,7 @@ class AuctionControllerTest {
 		Auction auction = new Auction(null,
 				"Tytuł aukcji",
 				"Opis minimum 10 znaków",
-				new BigDecimal(2.99).round(new MathContext(3, RoundingMode.DOWN)),
+				new BigDecimal("2.99"),
 				new User(null, "admin@dummy.pl", "pass123", "Tester", true, Role.USER)
 		);
 
