@@ -37,28 +37,25 @@ public class ChangePasswordController {
     }
 
 
-//    @PutMapping("/change_password")
-//    public ChangePasswordForm updatePassword(Model model) {
-//        var email = SecurityContextHolder.getContext().getAuthentication().getName();
-//        String password = userService.changePassword().map(u -> u.getName()).orElse(" ");
-//        String user = userService.getUserByEmail(email).map(u -> u.getName()).orElse(" ");
-//        model.addAttribute("email", email);
-//        model.addAttribute("password", password);
-//        return "change_password";
-//    }
-
     @PostMapping("/change_password")
-    public String updatePassword(@ModelAttribute("change_password") @Valid ChangePasswordForm form,
-                                   BindingResult bindingResult, RedirectAttributes attributes) {
+    public String updatePassword(Model model, @ModelAttribute("change_password") @Valid ChangePasswordForm form,
+                                 BindingResult bindingResult, RedirectAttributes attributes) {
         var email = SecurityContextHolder.getContext().getAuthentication().getName();
+
         if (!form.getNewPassword().equals(form.getRetypedNewPassword())) {
-            bindingResult.rejectValue("password", "change.password.errorMsg.passwordMismatch");
+            bindingResult.rejectValue("newPassword", "change.password.errorMsg.passwordMismatch");
         } else if (!bindingResult.hasErrors()) {
-            userService.changePassword(email, form.getOldPassword(), form.getRetypedNewPassword());
-            attributes.addFlashAttribute("success", "change.password.success");
-            return "redirect:/profile";
+            boolean passwordChanged = userService.changePassword(email, form.getOldPassword(), form.getNewPassword());
+            if (passwordChanged) {
+                attributes.addFlashAttribute("success", "change.password.success");
+                return "redirect:/profile";
+            } else {
+                System.out.println("Hasło niepoprawne.");
+                return "change_password";
+
+            }
+
         }
         return "change_password";
     }
-
 }

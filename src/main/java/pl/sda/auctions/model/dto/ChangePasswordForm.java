@@ -12,12 +12,12 @@ public class ChangePasswordForm {
     private String newPassword;
 
     @Size(min = 6, max = 100, message = "{registration.errorMsg.password}")
-    private String retypeNewPassword;
+    private String retypedNewPassword;
 
     public ChangePasswordForm(String oldPassword, String newPassword, String retypeNewPassword) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
-        this.retypeNewPassword = retypeNewPassword;
+        this.retypedNewPassword = retypeNewPassword;
 
     }
 
@@ -35,11 +35,11 @@ public class ChangePasswordForm {
     }
 
     public String getRetypedNewPassword() {
-        return retypeNewPassword;
+        return retypedNewPassword;
     }
 
-    public void setRetypeNewPassword(String retypeNewPassword) {
-        this.retypeNewPassword = retypeNewPassword;
+    public void setRetypedNewPassword(String retypedNewPassword) {
+        this.retypedNewPassword = retypedNewPassword;
     }
 
 
@@ -54,12 +54,12 @@ public class ChangePasswordForm {
         ChangePasswordForm that = (ChangePasswordForm) o;
         return Objects.equals(oldPassword, that.oldPassword) &&
                 Objects.equals(newPassword, that.newPassword) &&
-                Objects.equals(retypeNewPassword, that.retypeNewPassword);
+                Objects.equals(retypedNewPassword, that.retypedNewPassword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(oldPassword, newPassword, retypeNewPassword);
+        return Objects.hash(oldPassword, newPassword, retypedNewPassword);
 
     }
 }
