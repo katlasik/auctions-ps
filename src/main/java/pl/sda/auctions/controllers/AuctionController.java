@@ -44,8 +44,7 @@ public class AuctionController {
 	public String getPostAuction(@ModelAttribute("auction") @Valid AuctionForm auction,
 								 BindingResult bindingResult, RedirectAttributes attributes) throws Exception {
 		if (!bindingResult.hasErrors()) {
-			var email = SecurityContextHolder.getContext().getAuthentication().getName();
-			String ownerEmail = userService.getUserByEmail(email).map(User::getEmail).orElse(" ");
+			String ownerEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 			attributes.addFlashAttribute("auctionSuccess", "{auction.success");
 			auctionService.createAuction(auction.getTitle(),
 					auction.getDescription(),
