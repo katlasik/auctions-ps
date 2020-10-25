@@ -1,7 +1,5 @@
 package pl.sda.auctions.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,28 +12,20 @@ import javax.validation.Valid;
 
 import pl.sda.auctions.model.dto.CategoryForm;
 import pl.sda.auctions.services.CategoryService;
-import pl.sda.auctions.services.SecurityService;
 
 @Controller
 public class CategoryController {
 
-	private final SecurityService securityService;
 	private final CategoryService categoryService;
 
-	public CategoryController(SecurityService securityService, CategoryService categoryService) {
-		this.securityService = securityService;
+	public CategoryController(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
 
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/create_category")
-	public String getAuction(@ModelAttribute("category") CategoryForm category, RedirectAttributes attributes) {
-		if (securityService.userIsLoggedIn()) {
+	public String getAuction(@ModelAttribute("category") CategoryForm category) {
 			return "create_category";
-		} else {
-			attributes.addFlashAttribute("auctionLogin", "{auction.loginInfo}");
-			return "redirect:";
-		}
 	}
 
 	@PreAuthorize("hasAuthority('ADMIN')")
