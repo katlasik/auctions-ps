@@ -3,14 +3,20 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
+                    <a class="navbar-link text-white" th:text="#{navigation.sell}" href="#"></a>
+                </li>
+                <li class="nav-item">
                     <div sec:authorize="!isAuthenticated()">
                         <a class="navbar-link text-white ml-3" th:text="#{navigation.registration}" href="/registration"></a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div sec:authorize="isAuthenticated()" class="my-2 my-lg-0 text-white ml-auto">
-                        <a class="navbar-link text-white" th:text="#{navigation.sell}" href="/create_auction"></a>
-                        <a class="col ml-3 navbar-link active text-xl-right text-white" th:text="#{navigation.profile}" th:href="@{/profile}"></a>
+                    <div sec:authorize="isAuthenticated()" class="">
+                        <a class="navbar-link text-xl-right text-white ml-3" th:text="#{navigation.sell}" href="/create_auction"></a>
+                        <span sec:authorize="hasAuthority('ADMIN')">
+                            <a class="navbar-link text-xl-right text-white ml-3" th:text="#{navigation.category}" href="/create_category"></a>
+                        </span>
+                        <a class="navbar-link text-xl-right text-white ml-3" th:text="#{navigation.profile}" th:href="@{/profile}"></a>
                         <a class="navbar-link text-xl-right text-white ml-3" th:text="#{navigation.logout}"
                            th:href="@{/logout}"></a>
                     </div>
