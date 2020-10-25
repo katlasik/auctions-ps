@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head.html :: head(title='auction.pageTitle')"></head>
+<body>
+<div th:replace="fragments/header.html :: header"></div>
+<main role="main" class="container">
+    <div class="container-fluid d-flex h-100 p-3 mx-auto flex-column justify-content-center">
+        <form th:object="${auction}" id="create_auction" method="post" action="/create_auction">
+            <h2 th:text="#{auction.pageTitle}"></h2>
+            <p>
+                <label for="title" class="sr-only"><h4 th:text="#{auction.title}"></h4></label>
+                <input type="text" id="title" th:field="*{title}" class="form-control" th:placeholder="#{auction.title}"
+                       required
+                       autofocus>
+            </p>
+            <div class="alert alert-warning" th:each="error: ${#fields.errors('title')}" th:text="${error}"></div>
+            <p>
+                <label for="description" class="sr-only"><h4 th:text="#{auction.description}"></h4></label>
+                <textarea type="text" id="description" th:field="*{description}" class="form-control" th:placeholder="#{auction.description}"
+                          required></textarea>
+            </p>
+            <div class="alert alert-warning" th:each="error: ${#fields.errors('description')}" th:text="${error}"></div>
+            <p>
+                <label for="price" class="sr-only"><h4 th:text="#{auction.price}"></h4></label>
+                <input type="text" id="price" th:field="*{price}" class="form-control"
+                       th:placeholder="#{auction.price}" required>
+            </p>
+            <div class="small alert alert-warning" th:each="error: ${#fields.errors('price')}" th:text="${error}"></div>
+            <input
+                    type="hidden"
+                    th:name="${_csrf.parameterName}"
+                    th:value="${_csrf.token}"/>
+            <button class="btn btn-lg btn-primary btn-block" th:text="#{auction.auction}" type="submit"></button>
+        </form>
+    </div>
+</main>
+
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

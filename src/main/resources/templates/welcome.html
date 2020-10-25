@@ -7,8 +7,11 @@
 
     <div class="jumbotron">
         <div class="container">
+            <div th:text="#{auction.success}" th:if="${auctionSuccess}" class="alert alert-success" role="alert"></div>
+            <div th:text="#{auction.loginInfo}" th:if="${auctionLogin}" class="alert alert-warning" role="alert"></div>
             <h1 class="display-3" th:text="#{welcome.auctions}"></h1>
             <p><a sec:authorize="!isAuthenticated()" class="btn btn-primary btn-lg" th:href="@{/login}" th:text="#{welcome.login}" role="button"></a></p>
+            <p><a sec:authorize="isAuthenticated()" class="btn btn-primary btn-lg" th:href="@{/create_auction}" th:text="#{auction.auction}" role="button"></a></p>
         </div>
     </div>
 
