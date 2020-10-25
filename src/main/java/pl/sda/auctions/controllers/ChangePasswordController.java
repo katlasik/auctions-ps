@@ -29,11 +29,8 @@ public class ChangePasswordController {
 
     @GetMapping("/change_password")
     public String getChangePassword(@ModelAttribute("change_password") ChangePasswordForm changePasswordForm) {
-        if (securityService.userIsLoggedIn()) {
-            return "change_password";
-        } else {
-            return "redirect:";
-        }
+        return "change_password";
+
     }
 
 
