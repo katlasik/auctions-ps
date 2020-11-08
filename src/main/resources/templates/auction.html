@@ -15,7 +15,7 @@
                 <label th:text="#{auction.owner}"></label>
                 <label th:text="${owner}"></label><br><br>
                 <label th:text="#{auction.categoryOnDetails}"></label>
-                <label th:text="${category}"></label>
+                <label th:text="${category}?: #{auction.emptyCategory}"></label>
             </p>
         </div>
 

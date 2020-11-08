@@ -28,7 +28,7 @@
             <p>
                 <label for="category" class="sr-only"><h4 th:text="#{auction.category}"></h4></label>
                 <select id="category" th:field="*{category}">
-                    <option selected value="" th:text="#{auction.emptyCategory}"></option>
+                    <option selected value="-1" th:text="#{auction.emptyCategory}"></option>
                     <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}">
                     </option>
                 </select>

@@ -29,7 +29,7 @@ public class AuctionDetailsController {
         String description = auction.getDescription();
         BigDecimal price = auction.getPrice();
         String owner = auction.getUser().getName();
-        String category = auction.getCategory() != null ? auction.getCategory().getName() : "Brak Kategorii";
+        String category = auction.getCategory() != null ? auction.getCategory().getName() : null;
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("price", price);
