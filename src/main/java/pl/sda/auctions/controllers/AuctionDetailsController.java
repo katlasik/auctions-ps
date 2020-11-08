@@ -2,12 +2,10 @@ package pl.sda.auctions.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.server.ResponseStatusException;
 import pl.sda.auctions.model.Auction;
-import pl.sda.auctions.model.User;
 import pl.sda.auctions.services.AuctionService;
 import java.math.BigDecimal;
 
@@ -31,10 +29,12 @@ public class AuctionDetailsController {
         String description = auction.getDescription();
         BigDecimal price = auction.getPrice();
         String owner = auction.getUser().getName();
+        String category = auction.getCategory() != null ? auction.getCategory().getName() : "Brak Kategorii";
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("price", price);
         model.addAttribute("owner", owner);
+        model.addAttribute("category", category);
         return "auction";
         }
     }

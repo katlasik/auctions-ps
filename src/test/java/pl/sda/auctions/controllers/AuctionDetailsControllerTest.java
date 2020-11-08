@@ -10,6 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.sda.auctions.model.Auction;
+import pl.sda.auctions.model.Category;
 import pl.sda.auctions.model.Role;
 import pl.sda.auctions.model.User;
 import pl.sda.auctions.repository.AuctionRepository;
@@ -41,14 +42,16 @@ class AuctionDetailsControllerTest {
                 "Tytuł aukcji",
                 "Opis aukcji",
                 new BigDecimal("10"),
-                new User(null, "name@gmail.com", "pass123", "User1", true, Role.USER)
+                new User(null, "name@gmail.com", "pass123", "User1", true, Role.USER),
+                new Category(null, "RTV", "Sprzęt RTV")
         );
         Mockito.when(auctionRepository.findById(1L)).thenReturn(Optional.of(auction));
         mockMvc.perform(get("/auction/1")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Tytuł aukcji")))
                 .andExpect(content().string(containsString("Opis aukcji")))
                 .andExpect(content().string(containsString("10")))
-                .andExpect(content().string(containsString("User1")));
+                .andExpect(content().string(containsString("User1")))
+                .andExpect(content().string(containsString("RTV")));
     }
 
     @Test

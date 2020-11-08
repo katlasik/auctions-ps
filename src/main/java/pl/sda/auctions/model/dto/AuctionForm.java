@@ -16,14 +16,17 @@ public class AuctionForm {
 	@Pattern(regexp = "^\\d+(\\.\\d{1,2})?$", message = "{auction.errorMsg.price}")
 	private String price;
 
+	private Long category;
+
 	public AuctionForm(@Size(min = 10, max = 200, message = "{auction.errorMsg.title}") String title,
 					   @Size(min = 10, max = 2000, message = "{auction.errorMsg.description}") String description,
 					   @Pattern(regexp = "^\\d+(\\.\\d{1,2})?$", message = "{auction.errorMsg.price}") String price,
-					   String owner) {
+					   String owner, Long category) {
 		this.title = title;
 		this.description = description;
 		this.price = price;
 		this.owner = owner;
+		this.category = category;
 	}
 
 	private String owner;
@@ -47,6 +50,14 @@ public class AuctionForm {
 
 	public String getPrice() {
 		return price;
+	}
+
+	public Long getCategory() {
+		return category;
+	}
+
+	public void setCategory(Long category) {
+		this.category = category;
 	}
 
 	public void setPrice(String price) {
