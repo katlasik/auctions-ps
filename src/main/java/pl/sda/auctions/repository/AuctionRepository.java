@@ -8,7 +8,4 @@ import java.util.Optional;
 @Repository
 public interface AuctionRepository extends JpaRepository<Auction, Long> {
 
-    Optional<Auction> findById(Long id);
-
-
 }
