@@ -1,7 +1,6 @@
 package pl.sda.auctions.controllers;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,14 +19,12 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 
 import pl.sda.auctions.model.Auction;
+import pl.sda.auctions.model.Category;
 import pl.sda.auctions.model.Role;
 import pl.sda.auctions.model.User;
 import pl.sda.auctions.repository.AuctionRepository;
-import pl.sda.auctions.repository.UserRepository;
 
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -62,8 +59,8 @@ class AuctionControllerTest {
 				"Tytuł aukcji",
 				"Opis minimum 10 znaków",
 				new BigDecimal("2.99"),
-				new User(null, "admin@dummy.pl", "pass123", "Tester", true, Role.USER)
-		);
+				new User(null, "admin@dummy.pl", "pass123", "Tester", true, Role.USER),
+				new Category(null, "RTV", "Sprzęt RTV"));
 
 		when(auctionRepository.save(auction)).thenReturn(auction);
 
@@ -72,6 +69,7 @@ class AuctionControllerTest {
 				.param("description", "Opis minimum 10 znaków")
 				.param("price", "2.99")
 				.param("owner", "admin@dummy.pl")
+				.param("category", "1")
 				.with(csrf())
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED))
 				.andExpect(status().isFound());

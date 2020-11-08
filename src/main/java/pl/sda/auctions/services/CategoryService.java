@@ -4,6 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 import pl.sda.auctions.model.Category;
 import pl.sda.auctions.repository.CategoryRepository;
 
@@ -20,6 +23,17 @@ public class CategoryService {
 
 	public boolean checkIfCategoryExist(String name){
 		return categoryRepository.checkIfCategoryExists(name);
+	}
+
+	public Optional<Category> findByName(String name){
+		return categoryRepository.findByName(name);
+	}
+	public Optional<Category> findById(Long id){
+		return categoryRepository.findById(id);
+	}
+
+	public List<Category> getCategories(){
+		return categoryRepository.findAll();
 	}
 
 	public void createCategory(String name, String description) {

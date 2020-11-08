@@ -1,13 +1,11 @@
 package pl.sda.auctions.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class Auction {
@@ -35,19 +33,23 @@ public class Auction {
 	@Column
 	private BigDecimal price;
 
+	@OneToOne
+	private Category category;
+
 	protected Auction(){}
 
 	public Auction(Long id,
 				   @NotEmpty @NotNull String title,
 				   @NotEmpty @NotNull String description,
 				   @NotNull BigDecimal price,
-				   User owner
-	) {
+				   User owner,
+				   Category category) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.price = price;
 		this.owner = owner;
+		this.category = category;
 	}
 
 	@Override
@@ -118,6 +120,14 @@ public class Auction {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 

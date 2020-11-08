@@ -25,6 +25,14 @@
                 <input type="text" id="price" th:field="*{price}" class="form-control"
                        th:placeholder="#{auction.price}" required>
             </p>
+            <p>
+                <label for="category" class="sr-only"><h4 th:text="#{auction.category}"></h4></label>
+                <select id="category" th:field="*{category}">
+                    <option selected value="-1" th:text="#{auction.emptyCategory}"></option>
+                    <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}">
+                    </option>
+                </select>
+            </p>
             <div class="small alert alert-warning" th:each="error: ${#fields.errors('price')}" th:text="${error}"></div>
             <input
                     type="hidden"
