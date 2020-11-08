@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sda.auctions.model.Role;
 import pl.sda.auctions.model.User;
-import pl.sda.auctions.model.dto.ChangePasswordForm;
 import pl.sda.auctions.repository.UserRepository;
 
 import java.util.Optional;
