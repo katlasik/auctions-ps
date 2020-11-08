@@ -38,4 +38,9 @@ public class AuctionService {
 			auctionRepository.save(auction);
 			logger.info("Auction was created. Auction = {}", auction);
 	}
+
+	public Optional<Auction> getAuctionById(Long id) {
+		return auctionRepository.findById(id);
+	}
+
 }
