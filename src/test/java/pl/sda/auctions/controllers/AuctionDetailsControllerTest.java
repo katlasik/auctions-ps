@@ -34,20 +34,30 @@ class AuctionDetailsControllerTest {
 
     @Test
     @DisplayName("All users should be able to display auction details.")
-    @WithMockUser(username = "admin@dummy.pl", password = "pass123")
+
     void viewAuctionDetails() throws Exception {
 
-        Auction auction = new Auction(null,
+        Auction auction = new Auction(1L,
                 "Tytuł aukcji",
                 "Opis aukcji",
                 new BigDecimal("10"),
                 new User(null, "name@gmail.com", "pass123", "User1", true, Role.USER)
         );
-        Mockito.when(auctionRepository.findById(auction.getId())).thenReturn(Optional.of(auction));
-        mockMvc.perform(get("/auction")).andDo(print()).andExpect(status().isOk())
+        Mockito.when(auctionRepository.findById(1L)).thenReturn(Optional.of(auction));
+        mockMvc.perform(get("/auction/1")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Tytuł aukcji")))
                 .andExpect(content().string(containsString("Opis aukcji")))
                 .andExpect(content().string(containsString("10")))
                 .andExpect(content().string(containsString("User1")));
+    }
+
+    @Test
+    @DisplayName("Status is not found when wrong data typed.")
+
+    void auctionDetailsNotFound() throws Exception {
+
+        Mockito.when(auctionRepository.findById(1L)).thenReturn(Optional.empty());
+        mockMvc.perform(get("/auction/1")).andDo(print()).andExpect(status().isNotFound());
+
     }
 }
